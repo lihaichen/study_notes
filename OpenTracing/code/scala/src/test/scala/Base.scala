@@ -15,10 +15,21 @@ class Base extends Specification {
 
   config.withSampler(new Configuration.SamplerConfiguration().withType("const").withParam(1))
   val trace: JaegerTracer = config.getTracer
-  println(trace.toString)
 
   GlobalTracer.registerIfAbsent(trace)
-  val span: JaegerSpan = trace.buildSpan("1").start()
-  span.log("hello 1")
+  val span: JaegerSpan = trace.buildSpan("operationName").start()
+  println(span.context().getSpanId.toHexString, span.context().toTraceId)
+  span.setTag("tag", "tag1")
+  span.setBaggageItem("Baggage","Baggage1")
+  span.log("log 1")
+  val span2 = trace.buildSpan("operationName2").asChildOf(span).start()
+  span2.setTag("tag", "tag2")
+
+  val bb = span2.getBaggageItem("Baggage")
+  println(bb)
+  println(span2.context().getSpanId.toHexString, span.context().toTraceId)
+//  span2.setBaggageItem("Baggage","Baggage1")
+  span2.log("log 2")
+  span2.finish()
   span.finish()
 }

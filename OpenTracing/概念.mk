@@ -5,6 +5,9 @@
 #### Trace
 由span组合的图
 
+#### SpanContext
+用将span的状态传递，并且跨越进程的边界。
+
 #### client 
 
 #### Agent 
