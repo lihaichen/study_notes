@@ -26,7 +26,22 @@ object FirstActor {
   def apply(): Behavior[String] = Behaviors.setup(context => new FirstActor(context))
 }
 
+sealed trait Command
+
+case class Tell(message: String) extends Command
+
+object SecondActor {
+  def apply(): Behavior[Command] = Behaviors.setup {
+    context =>
+      Behaviors.receiveMessage {
+        case Tell(message) =>
+          println(message)
+          Behaviors.same
+      }
+  }
+}
+
 class TestUnitSpec extends Specification {
-  val testSystem = ActorSystem(FirstActor(), "first")
-  testSystem ! "start"
+  val testSystem = ActorSystem(SecondActor(), "first")
+  testSystem ! Tell("hello")
 }
