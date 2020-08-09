@@ -1,4 +1,4 @@
-package com.lhc.akka
+package com.example.akka
 
 import akka.actor.typed.ActorSystem
 
