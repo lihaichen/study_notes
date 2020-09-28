@@ -1,9 +1,7 @@
-import org.specs2.mutable.Specification
-import io.jaegertracing.internal.{JaegerSpan, JaegerTracer}
-import io.opentracing.Span
-import io.opentracing.Tracer
-import io.opentracing.util.GlobalTracer
 import io.jaegertracing.Configuration
+import io.jaegertracing.internal.{JaegerSpan, JaegerTracer}
+import io.opentracing.util.GlobalTracer
+import org.specs2.mutable.Specification
 
 
 class Base extends Specification {
