@@ -34,8 +34,8 @@ val elasticsearchSchemaFactory: ElasticsearchSchemaFactory = new ElasticsearchSc
 
   val map = new util.HashMap[String, Object] {}
   map.put("hosts", s"""["http://localhost:9200"]""")
-  map.put("username", "")
-  map.put("password", "")
+  map.put("username", "用户名")
+  map.put("password", "密码")
   map.put("index", "test")
   val lhcTestSchema = elasticsearchSchemaFactory.create(rootSchema, "ES", map)
 
@@ -51,3 +51,8 @@ val stmt: Statement = connection.createStatement()
     val res: ResultSet = stmt.executeQuery("select * from ES.test")
 ```
 注意返回的数据是包括在 _MAP中
+
+## 测试结论
+- 目前测试发现是不支持插入操作的
+- 不支持like查询
+- 不支持contains查询，看源码contains会转成match查询，其他都是term查询
