@@ -1,12 +1,9 @@
-import io.jaegertracing.Configuration
-import io.jaegertracing.internal.metrics.InMemoryMetricsFactory
-import io.jaegertracing.internal.reporters.{CompositeReporter, LoggingReporter, RemoteReporter}
-import io.jaegertracing.internal.samplers.ConstSampler
-import io.jaegertracing.internal.{JaegerSpan, JaegerTracer}
-import io.jaegertracing.thrift.internal.senders.UdpSender
-import org.specs2.mutable.Specification
-
-class CloseUnitSpec extends Specification {
+//import io.jaegertracing.Configuration
+//import io.jaegertracing.internal.{JaegerSpan, JaegerTracer}
+//import org.specs2.mutable.Specification
+//
+//class CloseUnitSpec extends Specification {
+//  println("CloseUnitSpec")
 //  val config = new Configuration("close")
 //  val sender = new Configuration.SenderConfiguration
 //  sender.withAgentHost("stage.raiborn")
@@ -15,31 +12,28 @@ class CloseUnitSpec extends Specification {
 //  config.withReporter(new Configuration.ReporterConfiguration().withSender(sender))
 //  config.withSampler(new Configuration.SamplerConfiguration().withType("const").withParam(1))
 //  val trace: JaegerTracer = config.getTracer
-//  val span: JaegerSpan = trace.buildSpan("operationName").start()
-//  span.log("test close")
-//  Thread.sleep(10000)
-//  span.finish()
-
-
-  println("hello")
-//  val reporter = new CompositeReporter(
-//    new RemoteReporter.Builder()
-//      .withSender(new UdpSender(
-//       "stage.raiborn",
-//        6831
-//      ))
-//      .build(),
-//    new LoggingReporter()
-//  )
+//  val parentSpan: JaegerSpan = trace.buildSpan("parent").start()
+//  trace.activateSpan(parentSpan)
+//  parentSpan.log("parentSpan log")
+//  Thread.sleep(100)
 //
-//  val tracer = new JaegerTracer.Builder("serviceName")
-//    .withReporter(reporter)
-//    .withSampler(new ConstSampler(true))
-//    .build()
-//  val span = tracer.buildSpan("operationName").start()
-//  span.log("test close")
-//  Thread.sleep(1000000)
-//  span.finish()
+//  val spanChild1: JaegerSpan = trace.buildSpan("child1").asChildOf(parentSpan).start()
+//  spanChild1.log("spanChild1 log")
+//  Thread.sleep(100)
+////  parentSpan.finish()
+////  Thread.sleep(100)
+//  spanChild1.finish()
 //
-//  Thread.sleep(1000000)
-}
+//
+//  val spanChild2: JaegerSpan = trace.buildSpan("child2")
+//    .addReference("follows_from", parentSpan.context()).start()
+//  spanChild2.log("spanChild2 log")
+//  Thread.sleep(100)
+//  spanChild2.finish()
+//  Thread.sleep(100)
+//  trace.activeSpan().finish()
+//
+////  trace.buildSpan(parentSpan.context()).start().finish()
+//
+//
+//}
